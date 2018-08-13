@@ -12,6 +12,8 @@ NOTE: While we do offer a managed, enterprise level service to paying customers,
 Using the API is very simple. All that's needed to validate an address is to send a `GET` request using the below URL with one of our three supported formats (json/jsonp(with "callback" (all lowercase) queryparam)/xml).
 ```
 https://api.trumail.io/v2/lookups/{format}?email={email}&token={token}
+ACTUALLY:
+https://api.trumail.io/v1/{format}/{email}
 ```
 
 ## Using the library

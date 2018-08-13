@@ -1,0 +1,16 @@
+FROM golang:1.10-alpine AS builder
+RUN apk add --update curl make git ca-certificates
+RUN curl https://glide.sh/get | sh
+ENV GOOS=linux GOARCH=amd64
+COPY . /go/src/github.com/sdwolfe32/trumail
+WORKDIR /go/src/github.com/sdwolfe32/trumail
+RUN make
+RUN go build 
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=builder /go/src/github.com/sdwolfe32/trumail/trumail .
+RUN chmod 755 ./trumail
+CMD ["./trumail"]
+ 
